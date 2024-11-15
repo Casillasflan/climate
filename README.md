@@ -219,3 +219,9 @@ class DetailsScreen extends StatelessWidget {
 
 ```
 #### Evidence Screenshots
+
+https://github.com/Casillasflan/climate/blob/main/sdf.jpg
+
+https://github.com/Casillasflan/climate/blob/main/sdfjh.jpg
+
+https://github.com/Casillasflan/climate/blob/main/yhfg.jpg
