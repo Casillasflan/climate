@@ -63,7 +63,6 @@ This application provides users with real-time weather information for major cit
   - **services/**: Service files for API integration
 
 ### Full Code
-Include the complete code for the main screens, such as:
 
 #### Main Screen
 ```dart
@@ -83,3 +82,140 @@ class MainScreen extends StatelessWidget {
     );
   }
 }
+```
+### Pubspec
+```yaml
+name: ev2_app
+description: A Flutter project for EV2.
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  # Agrega aquí otras dependencias necesarias, por ejemplo:
+  http: ^0.13.5
+  provider: ^6.0.3
+  # etc.
+
+```
+---
+
+#### Code Snippets
+
+#### Main 
+
+```dart
+
+// main_screen.dart
+import 'package:flutter/material.dart';
+
+class MainScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Weather App'),
+      ),
+      body: Center(
+        child: Text('Select a city to view weather data.'),
+      ),
+    );
+  }
+}
+
+
+```
+
+#### State Management
+
+```dart
+
+// example_state_management.dart (Replace with actual file and content)
+// This example shows a basic Provider setup for state management.
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+class WeatherProvider with ChangeNotifier {
+  String _city = 'Unknown';
+  
+  String get city => _city;
+  
+  void setCity(String newCity) {
+    _city = newCity;
+    notifyListeners();
+  }
+}
+
+
+```
+#### Service Integration
+
+```dart
+
+// api_service.dart
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+class ApiService {
+  Future<Map<String, dynamic>> fetchWeatherData(String city) async {
+    final response = await http.get(Uri.parse('https://api.weatherapi.com/v1/current.json?key=YOUR_API_KEY&q=$city'));
+    
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      throw Exception('Failed to load weather data');
+    }
+  }
+}
+
+
+```
+#### Additional Features (e.g., Navigation)
+
+```dart
+
+// navigation_example.dart
+import 'package:flutter/material.dart';
+
+class NavigationExample extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: HomeScreen(),
+      routes: {
+        '/details': (context) => DetailsScreen(),
+      },
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Home')),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/details');
+          },
+          child: Text('Go to Details'),
+        ),
+      ),
+    );
+  }
+}
+
+class DetailsScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Details')),
+      body: Center(child: Text('Detail Screen Content')),
+    );
+  }
+}
+
+
+```
+#### Evidence Screenshots
